@@ -1,0 +1,19 @@
+language: objective-c
+branches:
+  only:
+  - macemacsjp-24.5
+script:
+- sh autogen.sh
+- sh configure --with-ns --without-x
+- make
+- make install
+before_deploy:
+-  tar cvzf emacs-24.5.tar.gz nextstep/Emacs.app
+deploy:
+  provider: releases
+  api_key:
+    secure: lRRWS8zhg+VTPtLv2XKWogRhvOpakzWuc1/ZpQXZUaaBd+ju4fhBWcJuOCapeYQ63wwj0YgGOff+QTrA7XDarFZTdZKVB/q0yhMD7JkHV+qZXdWPFRGT+y5aqDqwxq452iP8hCMXKfwYN/6EC+2rFZ0ShjwuqXtLc3+eTqPl0uC62yQv0Yhi7xHI+jVBnZ1inEiO3DimakS+viMrqLOcbK/88GC2GZS5Nd27MClQt0zI3miHEwX/ryT8bswGNWS/1cO+Zh18weChutv4EclbjlOj6uDR3pH5gm38llD/nX3RAYFmn7eh7xka0bngaro9YXhwHjvvJCzsbtGlnr1czkq92CzYOIeXsG20Fhl4HKa6ZNl3gcaP7XSOYTAqxrfuu/1r40OwWdmmKnIBK5mXuk9DLCiUZ6Pt/e65wibiS34+FzjXRy66HdIaGrDJxktW9xmbBLo1LnMsDbUriKmBmZMf3ioFZoMNIbTEP/0DuZZzZUwOAaIC8TQu/JHsiPIUs2IXi81T8AWrsipwoyVJ5J9US4ScwtWSFGIvoUWIvB7rk9pb8nXCM8fqPdRoRgp6PqN2nrSM7RPDrW7xucyjTQOIUOvTeLGjgQbqfgeKh/7tlzMrDsrl7T3WQoUieVlt1TSNdWajr5/3Di4yydHWMWC8P6kzD0IurmidfOOzPg0=
+  file: emacs-24.5.tar.gz
+  on:
+    repo: hylom/macemacsjp
+    branch: macemacsjp-24.5
